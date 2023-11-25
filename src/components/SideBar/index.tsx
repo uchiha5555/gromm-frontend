@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
 // Styled
-import { Layout, Image } from "./styled";
+import { Layout, Image, Menu } from "./styled";
 
 // Image
 import ImageLogo from "assets/images/Logo.png";
@@ -23,16 +23,18 @@ const SideBar = () => {
       <Link to="/">
         <Image src={ImageLogo} alt="No Logo" />
       </Link>
-      {MenuData.map((data, key) => {
-        return (
-          <MenuItem
-            icon={data.icon}
-            text={data.text}
-            router={data.router}
-            active={location.pathname === data.router}
-          />
-        );
-      })}
+      <Menu>
+        {MenuData.map((data, key) => {
+          return (
+            <MenuItem
+              icon={data.icon}
+              text={data.text}
+              router={data.router}
+              active={location.pathname === data.router}
+            />
+          );
+        })}
+      </Menu>
     </Layout>
   );
 };

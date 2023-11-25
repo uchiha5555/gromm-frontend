@@ -19,4 +19,10 @@ export const Layout = styled(Link)<LayoutProps>`
   &:hover {
     background: #536bf2;
   }
+
+  &:not(:last-child) {
+    margin-bottom: 8px;
+  }
 `;
+
+export const IconContainer = styled.div``;

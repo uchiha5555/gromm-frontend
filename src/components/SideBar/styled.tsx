@@ -15,3 +15,10 @@ export const Image = styled.img`
   width: 220px;
   margin: 25px;
 `;
+
+export const Menu = styled.div`
+  width: 90%;
+
+  display: flex;
+  flex-direction: column;
+`;
