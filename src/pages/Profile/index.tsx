@@ -1,7 +1,12 @@
 import React from "react";
 
+// styled
+import { Layout } from "./styled";
+
+//-------------------------------------------------------
+
 const Profile: React.FC = () => {
-  return <div>Profile</div>;
+  return <Layout>Profile</Layout>;
 };
 
 export default Profile;
