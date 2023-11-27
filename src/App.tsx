@@ -1,13 +1,17 @@
 import React from "react";
-
-// Router
 import { RouterProvider } from "react-router-dom";
-import { router } from "./routes";
+import { gsap } from "gsap";
+import ScrollTrigger from 'gsap/ScrollTrigger'
+import routers from "./routes";
 
-//------------------------------------------------------------------------
+gsap.registerPlugin(ScrollTrigger)
 
-const App = () => {
-  return <RouterProvider router={router} />;
-};
+const App: React.FC = () => {
+    return (
+        <React.Fragment>
+            <RouterProvider router={routers} />
+        </React.Fragment>
+    )
+}
 
 export default App;
