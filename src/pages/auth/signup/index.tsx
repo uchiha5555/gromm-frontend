@@ -29,6 +29,10 @@ const Signup = () => {
 
     const onSubmit = (e: any) => {
         e.preventDefault();
+        if (!isAgree) {
+            notification.warning({ message: 'Warning', description: 'Please check our terms of service and privacy policies' });
+            return;
+        }
         Modal.confirm({
             title: 'Are you sure ?',
             content: 'Do you want to register this informations ?',

@@ -24,8 +24,8 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         setUser: (state, action) => {
-            state.isAuthenticated = true;
-            state.user = jwtDecode(action.payload);
+            state.isAuthenticated = action.payload.isAuthenticated;
+            state.user = action.payload.isAuthenticated ? jwtDecode(action.payload.user) : null;
         }
     }
 });

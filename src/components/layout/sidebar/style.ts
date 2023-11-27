@@ -40,7 +40,7 @@ export const SidebarWrapper = styled.div`
   gap: 0.75rem;
 `
 
-export const ListItemContainer = styled.div<{ isActive?: boolean }>`
+export const ListItemContainer = styled.div<{ isActive: boolean }>`
   display: flex;
   align-self: center;
   justify-content: flex-start;
@@ -49,7 +49,8 @@ export const ListItemContainer = styled.div<{ isActive?: boolean }>`
   padding: 0.5rem 1rem;
   width: 100%;
   border-radius: 8px;
-  ${(isActive) => isActive ? `background: ${GV('purple')}` : `background: ${GV('gray')}`};
+
+  ${({ isActive }) => isActive ? `background: ${GV('purple')};` : `background: ${GV('gray')};`}
 
   &:hover {
     background: ${GV('purple')};

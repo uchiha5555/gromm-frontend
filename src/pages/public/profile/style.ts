@@ -22,14 +22,14 @@ export const BannerContainer = styled.div`
     width: 100%;
     height: 15rem;
     border-radius: 1rem;
-    padding: 2rem;
+    padding: 5rem 2rem 2rem;
 `;
 
 export const AvatarContainer = styled.div`
     background: url(${avatar});
     background-size: cover;
-    width: 150px;
-    height: 150px;
+    width: 120px;
+    height: 120px;
     border-radius: 1rem;
 `;
 

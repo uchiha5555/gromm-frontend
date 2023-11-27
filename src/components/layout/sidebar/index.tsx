@@ -43,18 +43,24 @@ const Sidebar = () => {
                         }} />
                     </Link>
                 </Flex>
-                {MenuData.map((data, key) => {
-                    if (data.router === '/' || isAuthenticated) {
-                        return (
-                            <Link to='#' key={key}>
-                                <ListItemContainer isActive={(pathname === data.router)} onClick={() => handleRoute(data.router)}>
-                                    <Icon icon={'Home'} />
-                                    <P>{data.text}</P>
-                                </ListItemContainer>
-                            </Link>
-                        );
-                    }
-                })}
+                <Flex $style={{
+                    fDirection: 'column',
+                    gap: '0.75rem',
+                    p: '1.5rem 0.5rem 0.5rem'
+                }}>
+                    {MenuData.map((data, key) => {
+                        if (data.router === '/' || isAuthenticated) {
+                            return (
+                                <Link to='#' key={key}>
+                                    <ListItemContainer isActive={pathname === data.router} onClick={() => handleRoute(data.router)}>
+                                        <data.icon size={19} />
+                                        <P>{data.text}</P>
+                                    </ListItemContainer>
+                                </Link>
+                            );
+                        }
+                    })}
+                </Flex>
             </SidebarWrapper>
         </SidebarContainer>
     )

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Flex, P } from '@/components/basic';
+import { Flex, P, Span } from '@/components/basic';
 import { AuthForm, CustomButton, CustomFont, CustomFont1, CustomLine, LetterContainer, MarkBar, Rect, Rect1, SigninContainer, SignupButton, SubmitButton } from './style';
 import { Link } from 'react-router-dom';
 import { Checkbox, Icon, Input } from '@/components/custom';
@@ -32,7 +32,7 @@ const Signin = () => {
                 const result = await login(formData);
                 if (result.success) {
                     localStorage.setItem('token', result.accessToken);
-                    dispatch(authActions.setUser(result.accessToken));
+                    dispatch(authActions.setUser({ isAuthenticated: true, user: result.accessToken}));
                     notification.success({ message: 'Success', description: 'Login Success!' });
                     navigate('/');
                 } else {
@@ -62,11 +62,11 @@ const Signin = () => {
                     <CustomLine />
                 </Flex>
                 <Flex $style={{ hAlign: 'center', gap: '1rem', w: '100%' }}>
-                    <CustomButton><Icon icon='Google' /><P $style={{ size: GV('font-size-5') }}>Sign in with Google</P></CustomButton>
+                    <CustomButton><Icon icon='Google' /><Span $style={{ size: GV('font-size-5') }}>Sign in with Google</Span></CustomButton>
                 </Flex>
                 <Flex $style={{ vAlign: 'center', gap: '0.25rem', w: '100%', hAlign: 'center' }}>
                     <CustomFont1>Don't have an account? </CustomFont1>
-                    <Link to={routerer('_SIGNUP')}><P $style={{ size: GV('font-size-5'), color: 'purple' }}>SignUp here</P></Link>
+                    <Link to={routerer('_SIGNUP')}><Span $style={{ size: GV('font-size-5'), color: 'purple' }}>SignUp here</Span></Link>
                 </Flex>
             </AuthForm>
         </SigninContainer>
