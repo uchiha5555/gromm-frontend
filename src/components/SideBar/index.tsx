@@ -8,7 +8,7 @@ import { Layout, Image, Menu } from "./styled";
 import ImageLogo from "assets/images/Logo.png";
 
 // Data
-import { MenuData } from "util/MenuData";
+import { MenuData } from "util/Data/MenuData";
 
 // Components
 import MenuItem from "components/Item/MenuItem/Index";
@@ -27,6 +27,7 @@ const SideBar = () => {
         {MenuData.map((data, key) => {
           return (
             <MenuItem
+              key={key}
               icon={data.icon}
               text={data.text}
               router={data.router}

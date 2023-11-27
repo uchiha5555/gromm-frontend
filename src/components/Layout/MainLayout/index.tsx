@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 import "aos/dist/aos.css";
 
 // Styled
-import { Layout } from "./styled";
+import { Layout, Main, AuthMenu, Button } from "./styled";
 
 // Component
 import SideBar from "components/SideBar";
@@ -16,7 +16,13 @@ const MainLayout: React.FC = () => {
   return (
     <Layout>
       <SideBar />
-      <Outlet />
+      <Main>
+        <AuthMenu>
+          <Button>Sign In</Button>
+          <Button>Sign Up</Button>
+        </AuthMenu>
+        <Outlet />
+      </Main>
     </Layout>
   );
 };

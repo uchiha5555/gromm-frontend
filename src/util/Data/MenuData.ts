@@ -2,7 +2,7 @@ import { FaUserAlt } from "react-icons/fa";
 import { IoHome } from "react-icons/io5";
 
 // type
-import { MenuItemType } from "./type";
+import { MenuItemType } from "../Type/type";
 
 export const MenuData: MenuItemType[] = [
   {

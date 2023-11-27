@@ -1,10 +1,10 @@
 import React from "react";
 
 // Styled
-import { Layout } from "./styled";
+import { IconContainer, Layout } from "./styled";
 
 // Type
-import { MenuItemType } from "util/type";
+import { MenuItemType } from "util/Type/type";
 
 interface MenuItemProps extends MenuItemType {
   active: boolean;
@@ -15,7 +15,9 @@ interface MenuItemProps extends MenuItemType {
 const MenuItem: React.FC<MenuItemProps> = (props) => {
   return (
     <Layout to={props.router} active={props.active}>
-      <props.icon />
+      <IconContainer>
+        <props.icon size={20} />
+      </IconContainer>
       {props.text}
     </Layout>
   );
