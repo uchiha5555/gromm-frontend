@@ -10,7 +10,6 @@ export const ProfileContainer = styled.div`
     gap: 1rem;
     width: 100%;
     height: 100%;
-    padding-top: 5rem;
     padding-left: 2rem;
     padding-right: 2rem;
 `;

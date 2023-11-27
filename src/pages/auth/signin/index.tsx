@@ -9,8 +9,11 @@ import { GV } from '@/utils/style.util';
 import { Modal, notification } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { login } from '@/actions/auth';
+import { useDispatch } from 'react-redux';
+import { authActions } from '@/redux/auth';
 
 const Signin = () => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [isAgree, setAgree] = useState(false);
     const [formData, setFormData] = useState({
@@ -29,6 +32,7 @@ const Signin = () => {
                 const result = await login(formData);
                 if (result.success) {
                     localStorage.setItem('token', result.accessToken);
+                    dispatch(authActions.setUser(result.accessToken));
                     notification.success({ message: 'Success', description: 'Login Success!' });
                     navigate('/');
                 } else {

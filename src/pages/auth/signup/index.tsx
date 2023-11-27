@@ -8,10 +8,13 @@ import { GV } from '@/utils/style.util';
 import { register } from '@/actions/auth';
 import { useNavigate } from 'react-router-dom';
 import { Modal, notification } from 'antd';
+import { useDispatch } from 'react-redux';
+import { authActions } from '@/redux/auth';
 
 
 const Signup = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [formData, setFormData] = useState({
         firstname: '',
         lastname: '',
@@ -33,6 +36,7 @@ const Signup = () => {
                 const result = await register(formData);
                 if (result.success) {
                     localStorage.setItem('token', result.accessToken);
+                    dispatch(authActions.setUser(result.accessToken));
                     notification.success({ message: 'Success', description: 'Registered successfully!' });
                     navigate('/');
                 } else {

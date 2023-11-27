@@ -6,10 +6,27 @@ import { MenuData } from "@/utils/util";
 import Image from '@/components/basic/img';
 import Logo from '@/assets/img/logo.png';
 import { Icon } from "@/components/custom";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { notification } from 'antd';
 
 const Sidebar = () => {
+    const navigate = useNavigate();
+    const { isAuthenticated, user } = useSelector((state: any) => state.auth);
     const { hash, pathname, search } = useLocation();
+
+    const handleRoute = (router: string) => {
+        if (isAuthenticated) {
+            if (router === '/profile') {
+                navigate(router + '/' + user.username);
+            } else {
+                navigate(router);
+            }
+        }
+        else if (router !== '/') {
+            notification.warning({ message: 'Warning', description: 'Please login!' });
+        }
+    }
 
     return (
         <SidebarContainer>
@@ -27,14 +44,16 @@ const Sidebar = () => {
                     </Link>
                 </Flex>
                 {MenuData.map((data, key) => {
-                    return (
-                        <Link to={data.router} key={key}>
-                            <ListItemContainer isActive={(pathname === data.router)}>
-                                <Icon icon={'Home'} />
-                                <P>{data.text}</P>
-                            </ListItemContainer>
-                        </Link>
-                    );
+                    if (data.router === '/' || isAuthenticated) {
+                        return (
+                            <Link to='#' key={key}>
+                                <ListItemContainer isActive={(pathname === data.router)} onClick={() => handleRoute(data.router)}>
+                                    <Icon icon={'Home'} />
+                                    <P>{data.text}</P>
+                                </ListItemContainer>
+                            </Link>
+                        );
+                    }
                 })}
             </SidebarWrapper>
         </SidebarContainer>
