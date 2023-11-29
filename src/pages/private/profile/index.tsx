@@ -1,6 +1,6 @@
 import { Modal } from 'antd';
-import { FC, memo } from 'react';
-import Settings from './profile/settings';
+import { FC } from 'react';
+import Settings from './settings';
 
 interface SettingModalType {
   visible: boolean,
@@ -10,9 +10,9 @@ interface SettingModalType {
 const SettingModal: FC<SettingModalType> = ({ visible, onChange }) => {
   return (
     <Modal open={visible} onCancel={() => onChange(false)} footer={null} className='custom-modal' width={900}>
-      <Settings modalPropsChange={onChange} />
+      <Settings />
     </Modal>
   )
 }
 
-export default memo(SettingModal);
+export default SettingModal;

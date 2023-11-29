@@ -9,6 +9,14 @@ const updateProfile = async (payload: any) => {
     return result;
 }
 
+const followUser = async (payload: any) => {
+    const result = await axios
+    .post(`${SERVER_URI}/users/follow`, payload)
+    .then(res => res.data);
+
+    return result;
+}
+
 const uploadImage = async (payload: any) => {
     const result = await axios
     .post(`${SERVER_URI}/users/upload`, payload)
@@ -25,4 +33,4 @@ const removeImage = async (payload: any) => {
     return result;
 }
 
-export { updateProfile, uploadImage, removeImage };
+export { updateProfile, uploadImage, removeImage, followUser };
