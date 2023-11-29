@@ -1,16 +1,7 @@
-// const _ROUTERS = {
-//   home: '/',
-//   metaverse: '/metaverse/',
-//   metaverse_marketplace: '/metaverse-marketplace',
-//   metaverse_details: '/metaverse-details',
-//   build_metaverse: '/build-metaverse',
-//   buy_nft: '/buy-nft',
-//   sell_nft: '/sell-nft',
-//   nft_marketplace: '/nft-marketplace',
-//   nft_details: '/nft-details',
-//   real_estate: '/real-estate',
-//   real_estate_details: '/real-estate-details',
-// };
+import { jwtDecode } from "jwt-decode";
+
+const token = localStorage.getItem('token');
+const user: any = token ? jwtDecode(token) : null;
 
 const _ROUTERS = {
 	// auth routes
@@ -25,8 +16,8 @@ const _ROUTERS = {
 
 
 	// submenu routes
-	home: '/',
-	profile: '/profile/:username'
+	_HOME: '/',
+	_PROFILE: '/profile/' + user?.username
 };
 
 export default _ROUTERS;

@@ -23,7 +23,7 @@ export const InputWrapper = styled.label<{ padding: string }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  ${({ padding }) => (padding ? `padding: ${padding};` : `padding: 0 0.25rem;`)}
+  ${({ padding }) => (padding ? `padding: ${padding};` : `padding: 0.5rem;`)}
   min-height: 1.5rem;
   z-index: 1;
 `;

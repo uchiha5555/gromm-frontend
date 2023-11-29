@@ -4,8 +4,12 @@ import { jwtDecode } from 'jwt-decode';
 interface ModelType {
     fullName?: string,
     username?: string,
+    email?: string,
     avatar?: string,
-    _id: string,
+    cover?: string,
+    bio?: string,
+    url?: string,
+    id: string,
 }
 
 interface InitialStateType {

@@ -1,12 +1,10 @@
-import { createBrowserRouter } from "react-router-dom";
+import { Outlet, createBrowserRouter } from "react-router-dom";
 import { Flex, Heading } from "@/components/basic";
 
 import _ROUTERS from "@/constants/route.constant";
 
 import PublicPage from "@/pages/public";
 import HomePage from "@/pages/public/home";
-import Signin from "@/pages/auth/signin";
-import Signup from "@/pages/auth/signup";
 import ProfilePage from "@/pages/public/profile";
 
 const routers = createBrowserRouter([
@@ -15,11 +13,11 @@ const routers = createBrowserRouter([
         element: <PublicPage />,
         children: [
             {
-                path: _ROUTERS.home,
+                path: _ROUTERS._HOME,
                 element: <HomePage />
             },
             {
-                path: _ROUTERS.profile,
+                path: _ROUTERS._PROFILE,
                 element: <ProfilePage />
             },
             {
@@ -27,14 +25,6 @@ const routers = createBrowserRouter([
                 element: <HomePage />
             },
         ],
-    },
-    {
-        path: _ROUTERS._SIGNIN,
-        element: <Signin />
-    },
-    {
-        path: _ROUTERS._SIGNUP,
-        element: <Signup />
     },
     {
         path: "*",

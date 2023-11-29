@@ -1,14 +1,14 @@
 import React from 'react';
 import { Flex, Link, P } from '@/components/basic';
 import _ROUTERS from '@/constants/route.constant';
-import { ListItemContainer, SidebarContainer, SidebarWrapper } from './style';
-import { MenuData } from "@/utils/util";
+import { ListItem, ListItemContainer, NestedHand, NestedItem, NestedItemList, SidebarContainer, SidebarWrapper } from './style';
+import { MenuData } from "@/constants/menu.constant";
 import Image from '@/components/basic/img';
 import Logo from '@/assets/img/logo.png';
-import { Icon } from "@/components/custom";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { notification } from 'antd';
+import { GV } from '@/utils/style.util';
 
 const Sidebar = () => {
     const navigate = useNavigate();
@@ -17,11 +17,7 @@ const Sidebar = () => {
 
     const handleRoute = (router: string) => {
         if (isAuthenticated) {
-            if (router === '/profile') {
-                navigate(router + '/' + user.username);
-            } else {
-                navigate(router);
-            }
+            navigate(router);
         }
         else if (router !== '/') {
             notification.warning({ message: 'Warning', description: 'Please login!' });
@@ -48,15 +44,31 @@ const Sidebar = () => {
                     gap: '0.75rem',
                     p: '1.5rem 0.5rem 0.5rem'
                 }}>
-                    {MenuData.map((data, key) => {
+                    {MenuData.map((data: any, key: number) => {
                         if (data.router === '/' || isAuthenticated) {
                             return (
-                                <Link to='#' key={key}>
-                                    <ListItemContainer isActive={pathname === data.router} onClick={() => handleRoute(data.router)}>
-                                        <data.icon size={19} />
-                                        <P>{data.text}</P>
-                                    </ListItemContainer>
-                                </Link>
+                                <ListItemContainer key={key}>
+                                    {!data.submenus
+                                    ? (
+                                        <ListItem isActive={pathname === data.router} onClick={() => handleRoute(data.router)}>
+                                            <data.icon />
+                                            <P>{data.text}</P>
+                                        </ListItem>
+                                    ) : (
+                                        <NestedItemList>
+                                            <NestedHand>
+                                                <data.icon />
+                                                <P>{data.text}</P>
+                                            </NestedHand>
+                                            {data.submenus.map((nestedItem: any, key: number) => (
+                                                <NestedItem key={key}>
+                                                    <data.icon size='12' />
+                                                    <P $style={{ size: GV('font-size-6') }}>{nestedItem.text}</P>
+                                                </NestedItem>
+                                            ))}
+                                        </NestedItemList>
+                                    )}
+                                </ListItemContainer>
                             );
                         }
                     })}

@@ -3,6 +3,7 @@ const variables = {
   danger: '#E03F3F',
   purple: '#536BF2',
   atomicpink: '#F75BB1',
+  red: '#B52B2B',
   blue: '#08A0D8',
   gray: '#14161C',
   black: '#000000',

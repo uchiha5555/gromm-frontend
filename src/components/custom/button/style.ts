@@ -23,7 +23,6 @@ export const StyledButton = styled.button<StyledButtonType>`
   gap: 0.3rem;
   font-family: ${GV('font')};
   transition: all ease-in-out 0.2s;
-  letter-spacing: 1px;
 
   ${({ w }) => (w ? `width: ${w};` : ``)}
   /* ${({ h }) => `line-height: ${h ? h : '4.5rem'};`} */

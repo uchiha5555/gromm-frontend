@@ -348,6 +348,19 @@ const GlobalStyle = createGlobalStyle`
 		width: 64px;
 		height: 40px;
 	}
+
+	.custom-modal .ant-modal-content {
+		background: ${GV('gray')};
+    	backdrop-filter: blur(3px);
+	}
+
+	.ant-modal {
+		color: inherit;
+	}
+
+	.cover-image .ant-upload-wrapper .ant-upload-list .ant-upload-list-item-container {
+		width: 100%;
+	}
 `;
 
 export default GlobalStyle;

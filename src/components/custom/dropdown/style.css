@@ -1,7 +1,6 @@
 .dropdown {
     position: relative;
     width: 100%;
-    letter-spacing: 1px;
 }
 
 .dropdown.dropdown-sm .dropdown-picker >div >span {

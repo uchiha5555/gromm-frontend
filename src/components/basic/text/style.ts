@@ -39,7 +39,6 @@ const setStyle = ({
 
 export const TextWrapper = styled.p<TextPropsType>`
   line-height: 1.5;
-  letter-spacing: 1px;
 
   ${({ queries, ...rest }: TextPropsType) => `
 		${setStyle(rest)}

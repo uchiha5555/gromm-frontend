@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 
 import { HomeContainer } from "./style";
-import { Button } from "antd";
-import { Flex, Link } from "@/components/basic";
 
 
 const HomePage = () => {
@@ -10,7 +8,6 @@ const HomePage = () => {
     }, [])
     return (
         <HomeContainer>
-            
         </HomeContainer>
     )
 }

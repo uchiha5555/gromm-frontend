@@ -4,8 +4,6 @@ import Background from '@/assets/img/auth-background.gif';
 
 export const SignupContainer = styled.div`
     position: relative;
-    min-height: 100vh;
-    padding-bottom: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,10 +15,6 @@ export const AuthForm = styled.form`
     padding: 2rem;
     flex-direction: column;
     gap: 1rem;
-    border-radius: .5rem;
-    border: 1px solid ${GV('gray')};
-    background: ${GV('gray')};
-    backdrop-filter: blur(3px);
 `;
 
 export const SubmitButton = styled.button`
@@ -33,7 +27,7 @@ export const SubmitButton = styled.button`
     background: ${GV('purple')};
 `;
 
-export const CustomFont = styled.div`
+export const CustomFont = styled.span`
     color: #A192A4;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;

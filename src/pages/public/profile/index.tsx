@@ -1,21 +1,33 @@
-import React from 'react';
 import { jwtDecode } from 'jwt-decode';
 
-import { AvatarContainer, BannerContainer, CustomButton, ProfileContainer, StatusContainer } from './style';
-import { Flex, Span } from '@/components/basic';
+import { AvatarContainer, BannerContainer, BioContainer, CustomButton, ProfileContainer, StatusContainer } from './style';
+import { Flex, P, Span } from '@/components/basic';
 import { useLocation } from 'react-router-dom';
+import { GV } from '@/utils/style.util';
+import { useSelector } from 'react-redux';
+import { UPLOAD_URI } from '@/config';
 
 const ProfilePage = () => {
     const { hash, pathname, search } = useLocation();
-    const token = localStorage.getItem('token');
     const username_by_url = pathname.split('/')[2] || null;
-
-    const user: any = token ? jwtDecode(token) : {};
+    const { user } = useSelector((state: any) => state.auth);
 
     return (
         <ProfileContainer>
-            <BannerContainer>
-                <AvatarContainer />
+            <BannerContainer src={UPLOAD_URI + user.cover}>
+                <Flex $style={{
+                    gap: '1.5rem'
+                }}>
+                    <AvatarContainer src={UPLOAD_URI + user.avatar} alt='' />
+                    <Flex $style={{
+                        fDirection: 'column',
+                        gap: '.5rem',
+                        p: '1rem 0 0'
+                    }}>
+                        <P $style={{ size: GV('font-size-3') }}>{`${user.firstname} ${user.lastname}`}</P>
+                        <BioContainer><Span $style={{ size: GV('font-size-6') }}>{user.bio}</Span></BioContainer>
+                    </Flex>
+                </Flex>
             </BannerContainer>
             <StatusContainer>
                 <Flex $style={{

@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import coverImage from '@/assets/img/cover.png';
-import avatar from '@/assets/img/avatar.png';
 import { GV } from "@/utils/style.util";
 
 export const ProfileContainer = styled.div`
@@ -14,9 +12,9 @@ export const ProfileContainer = styled.div`
     padding-right: 2rem;
 `;
 
-export const BannerContainer = styled.div`
+export const BannerContainer = styled.div<{ src: string }>`
     position: relative;
-    background: url(${coverImage});
+    ${({ src }) => src && `background: url(${src});`}
     background-size: cover;
     background-position: top center;
     width: 100%;
@@ -25,13 +23,18 @@ export const BannerContainer = styled.div`
     padding: 5rem 2rem 2rem;
 `;
 
-export const AvatarContainer = styled.div`
-    background: url(${avatar});
-    background-size: cover;
+export const AvatarContainer = styled.img`
+    /* ${({ src }) => src && `background: url(${src});`} */
+    /* background-size: contain; */
     width: 120px;
     height: 120px;
     border-radius: 1rem;
 `;
+
+export const BioContainer = styled.div`
+    width: 100%;
+    max-width: 40rem;
+`
 
 export const StatusContainer = styled.div`
     display: flex;
