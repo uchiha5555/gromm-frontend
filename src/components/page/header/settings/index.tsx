@@ -7,35 +7,33 @@ import {
   CustomButton,
   DeleteButton,
   MobileContainer,
-  MobileDeleteButton,
   MobileSubmitButton,
   ProfileInfo,
   SubmitButton,
   UploadButton,
 } from './style';
-import { GV } from '@/utils/style.util';
 import { useDispatch, useSelector } from 'react-redux';
 import { Modal, Upload, notification } from 'antd';
 import { removeImage, updateProfile, uploadImage } from '@/actions/user';
 import { authActions } from '@/redux/auth';
 import { UPLOAD_URI } from '@/config';
-import { useNavigate } from 'react-router-dom';
 
 interface FormDataType {
+  firstname: string,
+  lastname: string,
   username: string;
   displayName: string;
-  url: string;
   bio: string;
 }
 
 const Settings = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state: any) => state.auth);
   const [formData, setFormData] = useState<FormDataType>({
+    firstname: user ? user.firstname : '',
+    lastname: user ? user.lastname : '',
     username: user ? user.username : '',
     displayName: user ? user.displayName : '',
-    url: user ? user.url : '',
     bio: user ? user.bio : '',
   });
   const [avatar, setAvatar] = useState<string | ArrayBuffer | null>(
@@ -104,6 +102,15 @@ const Settings = () => {
       title: 'Are you sure ?',
       content: 'Do you want to save this data ?',
       async onOk() {
+        if (!formData.displayName) {
+          notification.warning({ message: 'Warning', description: 'Please input display name' });
+          return;
+        }
+        if (!formData.username) {
+          notification.warning({ message: 'Warning', description: 'Please input profile url' });
+          return;
+        }
+
         const result = await updateProfile({ ...formData, id: user.id });
         if (result.success) {
           localStorage.setItem('token', result.accessToken);
@@ -111,10 +118,14 @@ const Settings = () => {
             message: 'Success',
             description: 'Updated successfully',
           });
+          if (user.username !== result.model.username) {
+            window.location.href = `/u/${result.model.username}`;
+          }
           dispatch(
             authActions.setUser({ isAuthenticated: true, user: result.accessToken })
           );
-          navigate(result.model.url);
+        } else {
+          notification.warning({ message: 'Warning', description: result.message });
         }
       },
     });
@@ -228,26 +239,37 @@ const Settings = () => {
         </Flex>
         <ProfileInfo autoComplete="off" onSubmit={onSubmit}>
           <Input
-            value={formData.username}
+            label="First Name*"
+            value={formData.firstname}
             onChange={onChange}
-            name="username"
-            placeholder="Username"
+            name="firstname"
+            placeholder="First Name"
           />
           <Input
+            label="Last Name*"
+            value={formData.lastname}
+            onChange={onChange}
+            name="lastname"
+            placeholder="Last Name"
+          />
+          <Input
+            label="Display Name*"
             value={formData.displayName}
             onChange={onChange}
             name="displayName"
             placeholder="Display Name"
           />
           <Input
-            value={formData.url}
+            label="Profile URL*"
+            value={formData.username}
             onChange={onChange}
             gap="0"
             preSide={<Span>https://gromm.com/</Span>}
-            name="url"
+            name="username"
             placeholder="Profile URL"
           />
           <Textarea
+            label="Bio"
             value={formData.bio}
             onChange={onChange}
             name="bio"

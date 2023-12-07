@@ -9,7 +9,7 @@ interface SettingModalType {
 
 const SettingModal: FC<SettingModalType> = ({ visible, onChange }) => {
   return (
-    <Modal open={visible} onCancel={() => onChange(false)} footer={null} className='custom-modal' width={900}>
+    <Modal open={visible} onCancel={() => onChange(false)} footer={null} closable={false} className='custom-modal' width={900}>
       <Settings />
     </Modal>
   )

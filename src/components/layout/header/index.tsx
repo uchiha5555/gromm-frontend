@@ -2,18 +2,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { AuthButtonWrapper, AvatarImage, CustomButton, Dropdown, DropdownItemContainer, HeaderContainer, IconWrapperButton, MobileAuthButtonWrapper, UserAvatar, UserInfo } from "./style";
 import { Flex, Link, P } from "@/components/basic";
 import Image from "@/components/basic/img";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { authActions } from "@/redux/auth";
 import { DiAptana } from "react-icons/di";
 import { FaArrowRightFromBracket } from "react-icons/fa6";
 import AuthModal from "@/pages/auth";
-import SettingModal from "@/pages/private/profile";
 import { UPLOAD_URI } from "@/config";
 import { Icon } from "@/components/custom";
 import Logo from '@/assets/img/logo.png';
 import MenuDrawer from "./elements/drawer";
 import { menuActions } from "@/redux/menu";
+import SettingModal from "@/components/page/header";
 
 const Header = () => {
     const navigate = useNavigate();
@@ -93,7 +93,7 @@ const Header = () => {
                     <UserInfo>
                         <UserAvatar ref={menuButtonRef}>
                             <AvatarImage src={`${UPLOAD_URI + user.avatar}`} alt="" />
-                            <P>{user.fullName}</P>
+                            <P>{user.username}</P>
                         </UserAvatar>
                         <Dropdown isDropdown={isDropdown} ref={dropdownRef}>
                             <DropdownItemContainer onClick={() => { setIsDropdown(false); handleSettingVisible(true); }}>

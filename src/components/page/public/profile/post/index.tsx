@@ -60,6 +60,7 @@ const PostModal: FC<PostModalType> = ({ visible, onChange, onPostsChange }) => {
       open={visible}
       onCancel={() => refreshModal()}
       footer={null}
+      closable={false}
       className="custom-modal"
     >
       <Flex

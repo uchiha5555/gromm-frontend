@@ -7,6 +7,7 @@ import PublicPage from '@/pages/public';
 import HomePage from '@/pages/public/home';
 import ProfilePage from '@/pages/public/profile';
 import { Link } from 'react-router-dom';
+import Brackets from '@/pages/public/brackets';
 
 const routers = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const routers = createBrowserRouter([
       {
         path: _ROUTERS._PROFILE,
         element: <ProfilePage />,
+      },
+      {
+        path: _ROUTERS._BRACKETS,
+        element: <Brackets />
       },
       {
         path: '*',

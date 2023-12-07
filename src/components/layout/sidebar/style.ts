@@ -25,6 +25,9 @@ export const fadeOut = keyframes`
 `;
 
 export const SidebarContainer = styled.div`
+  position: 'fixed';
+  top: 0;
+  left: 0;
   display: flex;
   flex-direction: column;
   overflow: auto;
@@ -85,12 +88,14 @@ export const NestedItemList = styled.div`
   width: 100%;
 `;
 
-export const NestedItem = styled.div`
+export const NestedItem = styled.div<{ isActive?: boolean }>`
   display: flex;
   align-items: center;
   gap: .5rem;
   padding: 0.5rem 0 0.5rem 1rem;
   cursor: pointer;
+
+  ${({ isActive }) => isActive ? `background: ${GV('purple')};` : `background: ${GV('gray')};`}
 
   &:hover {
     background: ${GV('purple')};
