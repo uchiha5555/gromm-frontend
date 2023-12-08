@@ -46,6 +46,12 @@ const Settings = () => {
   const onChange = (e: any) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
+  const isProfileUrlValid = (username: string) => {
+    const res = /^[a-zA-Z0-9_]{5,}[a-zA-Z]+[0-9]*$/.exec(username);
+    const valid = !!res;
+    return valid;
+  }
+
   const handleImageChange = (file: any, flag: number) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -97,6 +103,7 @@ const Settings = () => {
 
   const onSubmit = (e: any) => {
     e.preventDefault();
+    console.log(isProfileUrlValid(formData.username));
 
     Modal.confirm({
       title: 'Are you sure ?',
@@ -107,7 +114,11 @@ const Settings = () => {
           return;
         }
         if (!formData.username) {
-          notification.warning({ message: 'Warning', description: 'Please input profile url' });
+          notification.warning({ message: 'Warning', description: 'Please input profile URL' });
+          return;
+        }
+        if (!isProfileUrlValid(formData.username)) {
+          notification.warning({ message: 'Warning', description: 'Profile URL can contains only letters(A-Z, a-z), numbers(0-9), underscore(_).' });
           return;
         }
 
