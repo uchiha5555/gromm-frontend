@@ -1,7 +1,7 @@
 import { GV } from "@/utils/style.util";
 import styled from "styled-components";
 
-export const HostModalWrapper = styled.div`
+export const HostModalWrapper = styled.form`
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
@@ -34,23 +34,12 @@ export const BannerContainer = styled.div`
     position: relative;
     width: 100%;
     height: 10rem;
-    z-index: 1;
-    
-    & > img {
-        transform: scale(1);
-    }
 
     &:hover {
-        & > img {
-            z-index: -1;
-            transform: scale(1.1);
-            transition: all ease-in-out 0.5s;
-        }
         & > div {
-            display: flex;
+            opacity: 1;
             background: rgba(0, 0, 0, 0.4);
-            filter: blur(3px);
-            z-index: 3;
+            backdrop-filter: blur(5px);
         }
     }
 `;
@@ -59,13 +48,14 @@ export const BannerOverlay = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
     gap: 1rem;
+    opacity: 0;
     width: 100%;
     height: 100%;
-    transition: all .3s ease-in-out;
+    transition: all ease-in-out 0.3s;
 `;
 
 export const MobileSubmitButton = styled.button`

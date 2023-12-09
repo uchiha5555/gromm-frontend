@@ -89,6 +89,7 @@ const Sidebar = () => {
                         <NestedItem
                           key={key}
                           isActive={pathname === nestedItem.router}
+                          isLast={key === data.submenus.length-1}
                           onClick={() => handleRoute(nestedItem.router)}>
                           {/* <data.icon size='12' /> */}
                           <P $style={{ size: GV('font-size-6') }}>{nestedItem.text}</P>

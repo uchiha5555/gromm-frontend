@@ -25,7 +25,7 @@ export const fadeOut = keyframes`
 `;
 
 export const SidebarContainer = styled.div`
-  position: 'fixed';
+  position: fixed;
   top: 0;
   left: 0;
   display: flex;
@@ -88,7 +88,7 @@ export const NestedItemList = styled.div`
   width: 100%;
 `;
 
-export const NestedItem = styled.div<{ isActive?: boolean }>`
+export const NestedItem = styled.div<{ isActive?: boolean, isLast?: boolean }>`
   display: flex;
   align-items: center;
   gap: .5rem;
@@ -96,6 +96,7 @@ export const NestedItem = styled.div<{ isActive?: boolean }>`
   cursor: pointer;
 
   ${({ isActive }) => isActive ? `background: ${GV('purple')};` : `background: ${GV('gray')};`}
+  ${({ isLast }) => isLast ? `border-radius: 0 0 0.5rem 0.5rem;` : ''}
 
   &:hover {
     background: ${GV('purple')};

@@ -26,7 +26,7 @@ const ProfilePage = () => {
   const { hash, pathname, search } = useLocation();
   const [visible, setVisible] = useState(false);
   const [model, setModel] = useState<any>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const username_by_url = pathname.split('/')[2] || null;
 
   useEffect(() => {
@@ -34,7 +34,7 @@ const ProfilePage = () => {
       const result = await getUser({ username: username_by_url });
       if (result.success) {
         setModel(result.model);
-        setLoading(true);
+        setLoading(false);
       } else {
         navigate('/404');
       }
@@ -73,7 +73,7 @@ const ProfilePage = () => {
     return { likeCounts, xpCounts, bxpCounts };
   }, [model]);
 
-  if (!loading) {
+  if (loading) {
     return <Loading />;
   }
   return (

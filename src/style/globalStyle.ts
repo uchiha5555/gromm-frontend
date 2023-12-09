@@ -393,11 +393,20 @@ const GlobalStyle = createGlobalStyle`
 		border-color: ${GV('purple')};
 	}
 
-	.ck-reset_all :not(.ck-reset_all-excluded *), .ck.ck-reset_all {
+	/* .ck-reset_all :not(.ck-reset_all-excluded *), .ck.ck-reset_all {
 		color: ${GV('white')} !important;
 		&:hover {
 			color: ${GV('black')} !important;
 		}
+	} */
+	.ant-radio-group .ant-radio-button-wrapper {
+		background: var(--gray) !important;
+		border-color: var(--purple) !important;
+		color: var(--white);
+	}
+	.ant-radio-group .ant-radio-button-wrapper-checked {
+		background: var(--purple) !important;
+		border-color: var(--purple) !important;
 	}
 `;
 
