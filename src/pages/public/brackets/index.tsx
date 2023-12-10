@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { BracketsContainer, CustomButton, DropdownContainer } from './style'
+import React, { useCallback, useEffect, useState } from 'react';
+import { BracketsContainer, CustomButton } from './style'
 import { Flex, Grid, P } from '@/components/basic';
 import { useDispatch, useSelector } from 'react-redux';
 import { bracketActions } from '@/redux/bracket';
@@ -24,9 +24,9 @@ const Brackets = () => {
 
   const renderCards = useCallback(() => (
     isMyHost === 'mine'
-      ? brackets.filter((item: any) => item.creator === user._id).map((item: any, key: number) => <BracketCard model={item} key={key} />)
+      ? brackets.filter((item: any) => item.creator._id === user.id).map((item: any, key: number) => <BracketCard model={item} key={key} />)
       : brackets.map((item: any, key: number) => <BracketCard model={item} key={key} />)
-  ), [brackets]);
+  ), [brackets, isMyHost]);
 
   return (
     <BracketsContainer>
