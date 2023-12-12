@@ -45,6 +45,7 @@ const Brackets = () => {
       <Grid $style={{
         columns: '4',
         gap: '2rem',
+        justifyItems: 'space-between',
         queries: {
           1440: {
             columns: '3'
@@ -52,8 +53,9 @@ const Brackets = () => {
           1200: {
             columns: '2'
           },
-          900: {
-            columns: '1'
+          768: {
+            columns: '1',
+            justifyItems: 'center'
           }
         }
       }}>

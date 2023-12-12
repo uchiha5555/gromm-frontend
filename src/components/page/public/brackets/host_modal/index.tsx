@@ -1,5 +1,7 @@
-import { DatePicker, Modal, Upload, notification } from 'antd';
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
 import React, { FC, useEffect, useState } from 'react';
+import { DatePicker, Modal, Upload, notification } from 'antd';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { LabelContainer, HostModalWrapper, SubmitButton, UploadButton, BannerContainer, BannerOverlay } from './style';
@@ -11,6 +13,8 @@ import { UPLOAD_URI } from '@/config';
 import { useDispatch, useSelector } from 'react-redux';
 import { hostBracket, uploadImage } from '@/actions/bracket';
 import { bracketActions } from '@/redux/bracket';
+
+dayjs.extend(customParseFormat);
 
 const HostModal = () => {
     const dispatch = useDispatch();
@@ -45,26 +49,27 @@ const HostModal = () => {
     const onSubmit = (e: any) => {
         e.preventDefault();
 
+        if (formData.title === '') {
+            notification.warning({ message: 'Warning', description: 'Please input title' });
+            return;
+        }
+        if (formData.start_date === '') {
+            notification.warning({ message: 'Warning', description: 'Please input start date' });
+            return ;
+        }
+        if (formData.vote_date === '') {
+            notification.warning({ message: 'Warning', description: 'Please input vote date' });
+            return;
+        }
+        if (formData.max_player < 2) {
+            notification.warning({ message: 'Warning', description: 'Please input max player number correctly' });
+            return;
+        }
+
         Modal.confirm({
             title: 'Are you sure ?',
             content: 'Do you want to save this data ?',
             async onOk() {
-                if (formData.title === '') {
-                    notification.warning({ message: 'Warning', description: 'Please input title' });
-                    return;
-                }
-                if (formData.start_date === '') {
-                    notification.warning({ message: 'Warning', description: 'Please input start date' });
-                    return ;
-                }
-                if (formData.vote_date === '') {
-                    notification.warning({ message: 'Warning', description: 'Please input vote date' });
-                    return;
-                }
-                if (formData.max_player < 2) {
-                    notification.warning({ message: 'Warning', description: 'Please input max player number correctly' });
-                    return;
-                }
                 const result = await hostBracket({ ...formData, id: bracket ? bracket.id : null, user: user ? user.id : null });
                 if (result.success) {
                     notification.success({ message: 'Success', description: 'Saved successfully' });
@@ -133,15 +138,36 @@ const HostModal = () => {
                         </UploadButton>
                     </BannerOverlay>
                 </BannerContainer>
-                <Flex $style={{ vAlign: 'center', gap: '1rem' }}>
+                <Flex $style={{
+                    vAlign: 'center',
+                    gap: '1rem',
+                    w: '100%',
+                    queries: {
+                        768: {
+                            fDirection: 'column'
+                        }
+                    }
+                }}>
                     <Input label="Title" value={formData.title} onChange={(e: any) => setFormData({ ...formData, title: e.target.value })} />
                     <LabelContainer>
                         <P $style={{ size: GV('font-size-6') }}>Start Date</P>
-                        <DatePicker value={formData.start_date} showTime onChange={(value, dateString) => setFormData({ ...formData, start_date: dateString })} className='custom-picker' />
+                        <DatePicker
+                            value={formData.start_date ? dayjs(formData.start_date, 'YYYY-MM-DD HH:mm:ss') : null}
+                            showTime={{ defaultValue: dayjs('00:00:00', 'HH:mm:ss') }}
+                            format='YYYY-MM-DD HH:mm:ss'
+                            onChange={(value, dateString) => setFormData({ ...formData, start_date: dateString })}
+                            className='custom-picker'
+                        />
                     </LabelContainer>
                     <LabelContainer>
                         <P $style={{ size: GV('font-size-6') }}>Voting Date</P>
-                        <DatePicker value={formData.vote_date} showTime onChange={(value, dateString) => setFormData({ ...formData, vote_date: dateString })} className='custom-picker' />
+                        <DatePicker
+                            value={formData.vote_date ? dayjs(formData.vote_date, 'YYYY-MM-DD HH:mm:ss') : null}
+                            showTime={{ defaultValue: dayjs('00:00:00', 'HH:mm:ss') }}
+                            format='YYYY-MM-DD HH:mm:ss'
+                            onChange={(value, dateString) => setFormData({ ...formData, vote_date: dateString })}
+                            className='custom-picker'
+                        />
                     </LabelContainer>
                     <Input label="Max Players" type='number' value={formData.max_player} onChange={(e: any) => setFormData({ ...formData, max_player: e.target.value })} />
                 </Flex>
