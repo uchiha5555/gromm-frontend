@@ -53,7 +53,7 @@ export const BannerContainer = styled.div`
     left: 0;
     width: 100%;
     height: 15rem;
-    filter: blur(5px);
+    /* filter: blur(5px); */
     z-index: -1;
 `;
 
@@ -68,7 +68,7 @@ export const BannerTitle = styled.div`
 `
 
 export const SubmissionContentWrapper = styled.div`
-    margin-top: 5rem;
+    margin-top: 16rem;
     padding: 2rem;
 `;
 
@@ -76,7 +76,7 @@ export const SubmissionContent = styled.div`
     border-radius: ${GV('radius-md')};
     background: ${GV('gray-200')};
     padding: 2.5rem 1.8rem 2rem;
-    height: 30rem;
+    height: 25rem;
 
     div {
         width: 100%;
