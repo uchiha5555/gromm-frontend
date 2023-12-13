@@ -75,6 +75,34 @@ export const SubmissionContentWrapper = styled.div`
 export const SubmissionContent = styled.div`
     border-radius: ${GV('radius-md')};
     background: ${GV('gray-200')};
-    padding: 3rem 2rem;
+    padding: 2.5rem 1.8rem 2rem;
     height: 30rem;
-`
+
+    div {
+        width: 100%;
+        height: 100%;
+        word-wrap: break-word;
+        overflow-y: auto;
+
+        &::-webkit-scrollbar {
+            position: absolute;
+            width: 4px;
+            height: 8px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: #eee;
+            border-radius: 5px;
+            box-shadow: #eee;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: #a6a7c7ac;
+            border-radius: 5px;
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+            background: var(--purple);
+        }
+    }
+`;

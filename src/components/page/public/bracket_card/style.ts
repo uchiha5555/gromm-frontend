@@ -7,6 +7,7 @@ export const CardContainer = styled.div`
     flex-direction: column;
     gap: 1rem;
     width: 100%;
+    height: 100%;
     border: 1px solid ${GV('purple')};
     border-radius: 0.5rem;
     transition: all .3s ease;
@@ -16,7 +17,15 @@ export const CardContainer = styled.div`
     }
 `;
 
+export const CardWrapper = styled.div`
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+`
+
 export const CardTitle = styled.div`
+    max-height: 50px;
     color: ${GV('white')};
     font-size: 1.25rem;
     font-weight: 800;
@@ -27,10 +36,13 @@ export const CardTitle = styled.div`
 `
 
 export const CardContent = styled.div`
+    flex: 1;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     gap: 1rem;
     width: 100%;
+    height: 100%;
     padding: 0 0.5rem 0.5rem;
 `;
 
@@ -39,7 +51,8 @@ export const CardAction = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 0 0.5rem 1rem;
+    height: 3rem;
+    padding: 0 0.5rem;
 `;
 
 export const StatusTab = styled.div<{ isOpen?: boolean }>`

@@ -31,6 +31,7 @@ const HostModal = () => {
     });
     const [file, setFile] = useState('');
     const [banner, setBanner] = useState<string | ArrayBuffer | null>(`${UPLOAD_URI}/banner.png`);
+    const [loading, setLoading] = useState(false);
 
     const refreshModal = () => dispatch(bracketActions.setVisible(false));
 
@@ -48,6 +49,7 @@ const HostModal = () => {
 
     const onSubmit = (e: any) => {
         e.preventDefault();
+        setLoading(true);
 
         if (formData.title === '') {
             notification.warning({ message: 'Warning', description: 'Please input title' });
@@ -63,6 +65,10 @@ const HostModal = () => {
         }
         if (formData.max_player < 2) {
             notification.warning({ message: 'Warning', description: 'Please input max player number correctly' });
+            return;
+        }
+        if (new Date(formData.start_date).getTime() > new Date(formData.vote_date).getTime()) {
+            notification.warning({ message: 'Warning', description: 'Please select date correctly' });
             return;
         }
 
@@ -81,13 +87,16 @@ const HostModal = () => {
                         if (upload_result.success) {
                             dispatch(bracketActions.saveBracket(upload_result.model));
                             setFile('');
+                            setLoading(false);
                         }
                     } else {
                         dispatch(bracketActions.saveBracket(result.model));
                         setFile('');
+                        setLoading(false);
                     }
                 } else {
                     notification.warning({ message: 'Warning', description: 'Error occurred' });
+                    setLoading(false);
                 }
             }
         })
@@ -104,8 +113,8 @@ const HostModal = () => {
             prizes: bracket ? bracket.prizes : '',
             rules: bracket ? bracket.rules : '',
             max_player: bracket ? bracket.max_player : 0
-        })
-    }, []);
+        });
+    }, [visible]);
 
     return (
         <Modal
@@ -199,7 +208,7 @@ const HostModal = () => {
                     />
                 </LabelContainer>
                 <Flex $style={{ hAlign: 'flex-end' }}>
-                    <SubmitButton type="submit">Save</SubmitButton>
+                    <SubmitButton type="submit">Save {loading && <Icon icon='Loading' />}</SubmitButton>
                 </Flex>
             </HostModalWrapper>
         </Modal>
