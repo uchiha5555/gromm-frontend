@@ -13,18 +13,28 @@ const Brackets = () => {
   const { user } = useSelector((state: any) => state.auth);
   const { brackets } = useSelector((state: any) => state.bracket);
   const [ isMyHost, setMyHost ] = useState('all');
+  const [time, setTime] = useState(new Date());
 
   useEffect(() => {
-    setTimeout(async () => {
+    (async () => {
       const result = await getBrakets(user.id);
       if (result.success)
         dispatch(bracketActions.getBrackets(result.model));
-    }, 0);
+    })();
   }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTime(new Date()); 
+    }, 1000); 
+
+    return () => clearInterval(interval);
+  }, []); 
+
 
   const renderCards = useCallback(() => (
     isMyHost === 'mine'
-      ? brackets.filter((item: any) => item.creator._id === user.id).map((item: any, key: number) => <BracketCard model={item} key={key} />)
+      ? brackets.filter((item: any) => item.creator._id === user.id).map((item: any, key: number) => <BracketCard model={item}  key={key} />)
       : brackets.map((item: any, key: number) => <BracketCard model={item} key={key} />)
   ), [brackets, isMyHost]);
 

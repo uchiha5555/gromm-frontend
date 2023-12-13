@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useMemo } from 'react'
 import moment from 'moment';
 import Image from '@/components/basic/img';
 import { ActionMenuButton, CardAction, CardContainer, CardContent, CardTitle, CardWrapper, StatusTab } from './style';
@@ -7,12 +7,19 @@ import { UPLOAD_URI } from '@/config';
 import { Link } from 'react-router-dom';
 
 interface BracketCardType {
-    model: any
+    model: any,
 }
 
 const BracketCard: FC<BracketCardType> = ({ model }) => {
     const currentDate = new Date().getTime();
     const voteDate = new Date(model.vote_date).getTime();
+
+    const distance = voteDate - currentDate;
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
   return (
     <CardContainer>
@@ -26,7 +33,7 @@ const BracketCard: FC<BracketCardType> = ({ model }) => {
                 }}>
                     <Flex $style={{ vAlign: 'center', gap: '4rem' }}>
                         <Flex $style={{ fDirection: 'column', gap: '0.25rem' }}>
-                            <Span $style={{ size: '0.75rem' }}>Voting Begins</Span>
+                            <Span $style={{ size: '0.75rem' }}>Voting Begins {distance > 0 ? '(' + days + "D : " + hours + "H : "  + minutes + 'M)' : '' } </Span>
                             <Span $style={{ size: '0.75rem', weight: '700' }}>{moment(model.start_date).format('YYYY-MM-DD HH:mm:ss')}</Span>
                         </Flex>
                         <Flex $style={{ fDirection: 'column', gap: '0.25rem' }}>
