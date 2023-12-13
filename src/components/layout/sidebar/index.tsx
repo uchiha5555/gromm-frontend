@@ -43,9 +43,10 @@ const Sidebar = () => {
         <ListItemContainer key={key}>
           {!data.submenus
           ? (
-            !isAuthenticated && data.router.includes('/u/') ? <></>
+            !isAuthenticated && data.router.includes('/u/') ? null
             : (
               <ListItem
+                
                 isActive={ pathname === data.router || (data.router.includes('/u/') && pathname.includes('/u/')) || (data.router.includes('bracket_url') && pathname.length === 7) }
                 onClick={() => handleRoute(data.router)}
               >

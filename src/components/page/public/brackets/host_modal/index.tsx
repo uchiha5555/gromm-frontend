@@ -31,7 +31,6 @@ const HostModal = () => {
     });
     const [file, setFile] = useState('');
     const [banner, setBanner] = useState<string | ArrayBuffer | null>(`${UPLOAD_URI}/banner.png`);
-    const [loading, setLoading] = useState(false);
 
     const refreshModal = () => dispatch(bracketActions.setVisible(false));
 
@@ -49,7 +48,6 @@ const HostModal = () => {
 
     const onSubmit = (e: any) => {
         e.preventDefault();
-        setLoading(true);
 
         if (formData.title === '') {
             notification.warning({ message: 'Warning', description: 'Please input title' });
@@ -87,16 +85,13 @@ const HostModal = () => {
                         if (upload_result.success) {
                             dispatch(bracketActions.saveBracket(upload_result.model));
                             setFile('');
-                            setLoading(false);
                         }
                     } else {
                         dispatch(bracketActions.saveBracket(result.model));
                         setFile('');
-                        setLoading(false);
                     }
                 } else {
                     notification.warning({ message: 'Warning', description: 'Error occurred' });
-                    setLoading(false);
                 }
             }
         })
@@ -208,7 +203,7 @@ const HostModal = () => {
                     />
                 </LabelContainer>
                 <Flex $style={{ hAlign: 'flex-end' }}>
-                    <SubmitButton type="submit">Save {loading && <Icon icon='Loading' />}</SubmitButton>
+                    <SubmitButton type="submit">Save</SubmitButton>
                 </Flex>
             </HostModalWrapper>
         </Modal>
