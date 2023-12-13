@@ -54,6 +54,9 @@ export const ListItemContainer = styled.div`
   align-items: center;
   width: 100%;
   border-radius: 8px;
+  &:not(:first-child) {
+    margin-top: 0.75rem;
+  }
 `;
 
 export const ListItem = styled.div<{ isActive?: boolean }>`
@@ -64,6 +67,7 @@ export const ListItem = styled.div<{ isActive?: boolean }>`
   border-radius: .5rem;
   width: 100%;
   cursor: pointer;
+
 
   ${({ isActive }) => isActive ? `background: ${GV('purple')};` : `background: ${GV('gray')};`}
 

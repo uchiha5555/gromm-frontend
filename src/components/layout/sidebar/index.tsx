@@ -39,7 +39,6 @@ const Sidebar = () => {
 
   const renderMenus = useCallback(() => (
     MenuData.map((data: any, key: number) => {
-      console.log(pathname.includes('bracket_url'), pathname.length === 7);
       return (
         <ListItemContainer key={key}>
           {!data.submenus
@@ -101,7 +100,6 @@ const Sidebar = () => {
         <Flex
           $style={{
             fDirection: 'column',
-            gap: '0.75rem',
             p: '1.5rem 0.5rem 0.5rem',
           }}
         >
